@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Currency Format Demo</title>
+</head>
+<body>
+	<form action="" method="get" accept-charset="utf-8">
+		<label>Money:</label>
+		<input type="text" name="money" class="input_money_format">
+		<button type="submit">Submit</button>
+	</form>
+	<p class="submit-result">money submited: <span></span></p>
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script>
+	$(document).on('keyup', '.input_money_format', function () {
+        var money = $(this).val().toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        $(this).val(formatMonney(money));
+    });
+    function formatMonney(money) {
+        var number = money.split(',').join('');
+        return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+    }
+    $('form').submit(function () {
+    	var input = $('.input_money_format');
+    	input.val(input.val().split(',').join(''));
+    	$('.submit-result > span').text(input.val());
+    	
+    	//return false for test submit value
+    	return false;
+    })
+</script>
+</html>
